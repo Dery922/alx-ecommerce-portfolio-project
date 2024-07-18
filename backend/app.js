@@ -1,10 +1,18 @@
+import path from 'path';
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
+import { notFound,errorHandler, } from "./middleware/errorMiddleware.js";
 dotenv.config();
-import products from "./data/products.js";
-import cors from "cors"
+//no more in use
+import cors from "cors";
+import uploadRoutes from './routes/uploadRoute.js'
 const port = process.env.PORT;
+
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 connectDB() //connecting to our database
 
@@ -13,22 +21,28 @@ const app = express();
 app.use(cors());
 
 
-app.get("/",(req,res) =>{
-  res.send("hello world")
-});
+app.use(cookieParser());
 
-app.get("/api/products", (req,res) => {
-   res.json(products)
-});
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
-//getting a product using an id
+app.use('/api/orders',orderRoutes)
 
-app.get("/api/product/:id",(req,res) => {
-    const product = products.find((p) => p._id === req.params.id)
-    res.json(product);
-});
+app.use("/api/products", productRoutes)
+app.use('/api/users', userRoutes);
+app.use('/appi/upload', uploadRoutes);
 
-console.log("hello world");
+app.get('/api/config/paypal', (req,res) => res.send({clientId:
+ process.env.PAYPAL_CLIENT_ID
+}));
+
+// const __dirname = path.resolve();
+// app.use('/uploads', express.static(path.join(__dirname,'uploads')));
+
+app.use(notFound);
+app.use(errorHandler);
+
+
 app.listen(port, () => {
   console.log(`Server started successfully at port ${port}`);
 })

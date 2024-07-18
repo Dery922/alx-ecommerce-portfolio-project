@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: "1",
     name: "Airpods wire",
     image: "/images/airpods.jpg",
     description: "Bluethooth technology lets you connect it with compatible",
@@ -12,7 +11,18 @@ const products = [
     numReviews: 86,
   },
   {
-    _id: "2",
+    name: "More wire",
+    image: "/images/airpods.jpg",
+    description: "Bluethooth technology lets you connect it with compatible",
+    brand: "Apple",
+    category: "Electronics",
+    price: 934,
+    counterInStock: 10,
+    rating: 2.5,
+    numReviews: 100,
+  },
+  {
+
     name: "Alexa works",
     image: "/images/alexa.jpg",
     description: "Bluethooth technology lets you connect it with compatible",
@@ -24,7 +34,7 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "3",
+
     name: "Camera Buy",
     image: "/images/camera.jpg",
     description: "Bluethooth technology lets you connect it with compatible",
@@ -36,7 +46,7 @@ const products = [
     numReviews: 14,
   },
   {
-    _id: "4",
+
     name: "Amazon Echo Dot 3rd Generation",
     image: "/images/sample.jpg",
     description:
@@ -49,7 +59,7 @@ const products = [
     numReviews: 28,
   },
   {
-    _id: "5",
+
     name: "IPhone 11 Phone",
     image: "/images/phone.jpg",
     description:
